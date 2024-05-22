@@ -1,6 +1,6 @@
 <?php
 $bbdd_servidor = 'localhost';
-$bbdd_nombre = 'bbdd_clothy';
+$bbdd_nombre = 'bbdd_clohty';
 $bbdd_user = 'root';
 $bbdd_password = '';
 
