@@ -13,8 +13,28 @@ $token = $_GET['token'];
 require_once 'includes/conexion.php';
 if (!isset($connexion)) die();
 
-$query = "SELECT ropa.nombre, ropa.descripcion, ropa.precio, ropa_talla_color.talla, ropa_talla_color.color, ropa_talla_color.cantidad
-FROM ropa JOIN ropa_talla_color ON ropa.codigo_ropa = ropa_talla_color.codigo_ropa WHERE ropa.codigo_ropa = '$token'";
+$query = "SELECT 
+    r.codigo_ropa,
+    r.nombre, 
+    r.descripcion, 
+    r.precio, 
+    r.imagen_principal,
+    r.tipo,
+    rtc.color,
+    rtc.talla,
+    rtc.cantidad,
+    ri.imagen,
+    ri.tipo AS imagen_tipo
+FROM 
+    ropa r
+JOIN 
+    ropa_talla_color rtc ON r.codigo_ropa = rtc.codigo_ropa
+LEFT JOIN 
+    ropa_imagenes ri ON rtc.codigo_ropa = ri.codigo_ropa AND rtc.color = ri.color
+WHERE 
+    r.codigo_ropa = '$token'
+ORDER BY 
+    rtc.color, rtc.talla, ri.tipo;";
 
 
 $result = $connexion->query($query);
