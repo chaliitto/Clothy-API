@@ -19,6 +19,7 @@ $query = "SELECT
     r.descripcion, 
     r.precio, 
     r.imagen_principal,
+    r.imagen_secundaria,
     r.tipo,
     rtc.color,
     rtc.talla,
